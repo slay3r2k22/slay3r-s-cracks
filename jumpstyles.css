@@ -16,9 +16,56 @@ body, html {
     align-items: center;
 }
 
+/* Header and Navbar */
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+    background-color: #0c0c0c;
+}
+
+.menu-icon {
+    font-size: 2rem;
+    cursor: pointer;
+    color: #ff2d55;
+    padding: 10px;
+    transition: transform 0.3s;
+}
+
+.menu-icon:hover {
+    transform: scale(1.2);
+}
+
+#navbar {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 50px;
+    left: 10px;
+    background-color: #333;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+#navbar a {
+    padding: 10px 20px;
+    color: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid #444;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#navbar a:hover {
+    background-color: #ff2d55;
+    color: #000;
+}
+
 .container {
     text-align: center;
-    padding: 20px;
+    padding: 60px 20px; /* Ensure it's below the navbar */
 }
 
 .title {
@@ -63,21 +110,3 @@ footer {
         opacity: 1;
     }
 }
-
-/* Navigation button */
-.nav-button {
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    color: #fff;
-    background-color: #333;
-    border: 2px solid #ff2d55;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.nav-button:hover {
-    background-color: #ff2d55;
-    color: #000;
-}
-
