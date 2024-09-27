@@ -15,19 +15,84 @@
 
 </head>
 <body>
-    <div class="container">
-        <h1 class="heading">Hamarosan!</h1>
-        <p class="subtext">Hamarosan nyitunk!</p>
+    <h1>Website Under Development! Check back frequently to see more cool things!</h1>
+
+    <h2>Blog Posts</h2>
+
+    <!-- Blog Post Form (Visible Only After Password Authentication) -->
+    <div id="blogPostFormContainer" style="display: none;">
+        <form id="blogPostForm">
+            <label for="blogTitle">Title:</label><br>
+            <input type="text" id="blogTitle" required><br><br>
+            <label for="blogContent">Content:</label><br>
+            <textarea id="blogContent" rows="4" cols="50" required></textarea><br><br>
+            <button type="submit">Submit Post</button>
+        </form>
     </div>
 
-    <footer>
-        <p>© Gameer Studios 2024-2024 - Minden jog fenntartva!</p>
-    </footer>
+    <!-- Blog Posts Display -->
+    <div id="blogPostsContainer">
+        <h3>All Blog Posts</h3>
+        <div id="blogPosts"></div>
+    </div>
 
-    <script src="script.js"></script>
-    
-<center>
-<a href="jumpsite.html">Fun oldal (semmi komoly)</a>
-</center>
+    <!-- Admin Login for Posting -->
+    <div id="adminLogin">
+        <h3>Admin Login</h3>
+        <label for="adminPassword">Enter Password:</label><br>
+        <input type="password" id="adminPassword"><br><br>
+        <button onclick="authenticate()">Login</button>
+    </div>
+
+    <script>
+        // Simple password check (you can change the password here)
+        const ADMIN_PASSWORD = "yourpassword";
+
+        // Authenticate admin login
+        function authenticate() {
+            const inputPassword = document.getElementById("adminPassword").value;
+            if (inputPassword === ADMIN_PASSWORD) {
+                document.getElementById("adminLogin").style.display = "none";
+                document.getElementById("blogPostFormContainer").style.display = "block";
+            } else {
+                alert("Incorrect password. Access denied.");
+            }
+        }
+
+        // Save blog posts to localStorage
+        document.getElementById("blogPostForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            // Get blog post details
+            const title = document.getElementById("blogTitle").value;
+            const content = document.getElementById("blogContent").value;
+
+            // Save the post
+            let blogPosts = JSON.parse(localStorage.getItem("blogPosts")) || [];
+            blogPosts.push({ title, content });
+            localStorage.setItem("blogPosts", JSON.stringify(blogPosts));
+
+            // Reset form
+            document.getElementById("blogPostForm").reset();
+
+            // Display the updated posts
+            displayBlogPosts();
+        });
+
+        // Display blog posts from localStorage
+        function displayBlogPosts() {
+            const blogPosts = JSON.parse(localStorage.getItem("blogPosts")) || [];
+            const blogPostsContainer = document.getElementById("blogPosts");
+            blogPostsContainer.innerHTML = "";
+            blogPosts.forEach(post => {
+                const postElement = document.createElement("div");
+                postElement.innerHTML = `<h4>${post.title}</h4><p>${post.content}</p>`;
+                blogPostsContainer.appendChild(postElement);
+            });
+        }
+
+        // Initialize the display of blog posts on page load
+        window.onload = displayBlogPosts;
+    </script>
 </body>
 </html>
