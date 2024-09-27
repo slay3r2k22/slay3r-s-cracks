@@ -1,5 +1,5 @@
 // Simple password check
-const ADMIN_PASSWORD = "yourpassword";
+const ADMIN_PASSWORD = "gameer_adminp4s3";
 
 // Authenticate admin login
 function authenticate() {
