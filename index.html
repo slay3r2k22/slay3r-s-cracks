@@ -3,96 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Hamarosan!</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Website Under Development!</title>
+    <link rel="stylesheet" href="style.css">
+    
     <!-- Open Graph Meta Tags for Link Embed -->
-<meta property="og:title" content="Hamarosan!" />
-<meta property="og:description" content="Hamarosan megnyílik!" />
-<meta property="og:image" content="Zombatar_1.jpg" />
-<meta property="og:url" content="https://slay3r2k22.github.io/mywebtest/index.html" />
-<meta property="og:type" content="website" />
-
+    <meta property="og:title" content="Website Under Development!" />
+    <meta property="og:description" content="Check back frequently for cool updates and features!" />
+    <meta property="og:image" content="https://yourwebsite.com/Zombatar_1.jpg" />
+    <meta property="og:url" content="https://yourwebsite.com/index.html" />
+    <meta property="og:type" content="website" />
 </head>
 <body>
     <h1>Website Under Development! Check back frequently to see more cool things!</h1>
 
     <h2>Blog Posts</h2>
 
+    <!-- Scrollable Blog Posts Panel -->
+    <div class="blog-posts-panel">
+        <div id="blogPosts"></div>
+    </div>
+
     <!-- Blog Post Form (Visible Only After Password Authentication) -->
     <div id="blogPostFormContainer" style="display: none;">
         <form id="blogPostForm">
             <label for="blogTitle">Title:</label><br>
             <input type="text" id="blogTitle" required><br><br>
-            <label for="blogContent">Content:</label><br>
+
+            <label for="blogContent">Content (Supports Markdown for Links):</label><br>
             <textarea id="blogContent" rows="4" cols="50" required></textarea><br><br>
+
+            <label for="blogImage">Upload Image:</label><br>
+            <div id="dropZone">Drag & Drop or <span id="fileSelectText">Select File</span></div>
+            <input type="file" id="blogImage" accept="image/*" style="display:none;"><br><br>
+
             <button type="submit">Submit Post</button>
         </form>
-    </div>
-
-    <!-- Blog Posts Display -->
-    <div id="blogPostsContainer">
-        <h3>All Blog Posts</h3>
-        <div id="blogPosts"></div>
     </div>
 
     <!-- Admin Login for Posting -->
     <div id="adminLogin">
         <h3>Admin Login</h3>
-        <label for="adminPassword">Enter Password:</label><br>
-        <input type="password" id="adminPassword"><br><br>
-        <button onclick="authenticate()">Login</button>
+        <div class="login-form">
+            <label for="adminPassword">Enter Password:</label><br>
+            <input type="password" id="adminPassword"><br><br>
+            <button onclick="authenticate()">Login</button>
+        </div>
     </div>
 
-    <script>
-        // Simple password check (you can change the password here)
-        const ADMIN_PASSWORD = "yourpassword";
-
-        // Authenticate admin login
-        function authenticate() {
-            const inputPassword = document.getElementById("adminPassword").value;
-            if (inputPassword === ADMIN_PASSWORD) {
-                document.getElementById("adminLogin").style.display = "none";
-                document.getElementById("blogPostFormContainer").style.display = "block";
-            } else {
-                alert("Incorrect password. Access denied.");
-            }
-        }
-
-        // Save blog posts to localStorage
-        document.getElementById("blogPostForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            
-            // Get blog post details
-            const title = document.getElementById("blogTitle").value;
-            const content = document.getElementById("blogContent").value;
-
-            // Save the post
-            let blogPosts = JSON.parse(localStorage.getItem("blogPosts")) || [];
-            blogPosts.push({ title, content });
-            localStorage.setItem("blogPosts", JSON.stringify(blogPosts));
-
-            // Reset form
-            document.getElementById("blogPostForm").reset();
-
-            // Display the updated posts
-            displayBlogPosts();
-        });
-
-        // Display blog posts from localStorage
-        function displayBlogPosts() {
-            const blogPosts = JSON.parse(localStorage.getItem("blogPosts")) || [];
-            const blogPostsContainer = document.getElementById("blogPosts");
-            blogPostsContainer.innerHTML = "";
-            blogPosts.forEach(post => {
-                const postElement = document.createElement("div");
-                postElement.innerHTML = `<h4>${post.title}</h4><p>${post.content}</p>`;
-                blogPostsContainer.appendChild(postElement);
-            });
-        }
-
-        // Initialize the display of blog posts on page load
-        window.onload = displayBlogPosts;
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
